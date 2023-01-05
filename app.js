@@ -9,22 +9,30 @@ app.get('/', (req, res) => {
   const posts = postBank.list();
   // console.log(posts);
   res.send(`
-    <html>
-      <head>
-        <link rel='stylesheet' href='/style.css' />
-        <title>Wizard News</title>
-      </head>
-      <body>
-        <h1><img src='/logo.png'/>Wizard News</h1>
-        <ul>
-          ${posts
-            .map((post) => {
-              return `<li>${post.title}</li>`;
-            })
-            .join('')}
-        </ul>
-      </body>
-    </html>
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>Wizard News</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="news-list">
+      <header><img src="/logo.png"/>Wizard News</header>
+      ${posts.map(post => `
+        <div class='news-item'>
+          <p>
+            <span class="news-position">${post.id}. ▲</span>
+            ${post.title}
+            <small>(by ${post.name})</small>
+          </p>
+          <small class="news-info">
+            ${post.upvotes} upvotes | ${post.date}
+          </small>
+        </div>`
+      ).join('')}
+    </div>
+  </body>
+</html>
   `);
 });
 
