@@ -7,7 +7,7 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
   //TODO - get all the posts
   const posts = postBank.list();
-  // console.log(posts);
+  //console.log(posts);
   res.send(`
   <!DOCTYPE html>
   <html>
