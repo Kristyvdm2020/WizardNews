@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const postBank = require('./postBank');
+var nodeTimeAgo = require("node-time-ago")
 
 app.use(express.static('public'));
 
@@ -18,17 +19,21 @@ app.get('/', (req, res) => {
   <body>
     <div class="news-list">
       <header><img src="/logo.png"/>Wizard News</header>
-      ${posts.map(post => `
-        <div class='news-item'>
+      ${posts.map(post => {
+        const date = nodeTimeAgo(post.date)
+        console.log(date)
+        return (
+        `
+         <div class='news-item'>
           <p>
             <span class="news-position">${post.id}. ▲</span>
             <a href="/posts/${post.id}">${post.title}</a>
             <small>(by ${post.name})</small>
           </p>
           <small class="news-info">
-            ${post.upvotes} upvotes | ${post.date}
+            ${post.upvotes} upvotes | nodeTimeAgo(${post.date})
           </small>
-        </div>`
+        </div>`)}
       ).join('')}
     </div>
   </body>
