@@ -65,7 +65,7 @@ app.get('/posts/:id', (req, res) => {
     res.send(html)
   } else {
   // ... Otherwise, send the regular post detail HTML
-  
+  const date = nodeTimeAgo(post.date);
   res.send(`
   <!DOCTYPE html>
   <html>
@@ -82,7 +82,7 @@ app.get('/posts/:id', (req, res) => {
             <small>(by ${post.name})</small>
           </p>
           <small class="news-info">
-            ${post.date}
+            ${date}
           </small>
           <p>
             ${post.content}
