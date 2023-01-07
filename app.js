@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
       <header><img src="/logo.png"/>Wizard News</header>
       ${posts.map(post => {
         const date = nodeTimeAgo(post.date)
-        console.log(date)
+        //console.log(date);
         return (
         `
          <div class='news-item'>
@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
             <small>(by ${post.name})</small>
           </p>
           <small class="news-info">
-            ${post.upvotes} upvotes | nodeTimeAgo(${post.date})
+            ${post.upvotes} upvotes | ${date}
           </small>
         </div>`)}
       ).join('')}
